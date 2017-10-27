@@ -6,7 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.8/dc.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.12/crossfilter.min.js"></script>
@@ -15,37 +18,49 @@
     
 </head>
 <body>
-    <div id="chart1"></div>
-    
-    <script>
-    queue()
-        .defer(d3.csv, "data/Salaries.csv")
-        .await(makeGraphs);
+<section class = "section">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12">
+          <h1>Change Gender</h1>
+          <div id ="change_gender"></div>
+        </div>
+	 </div>
+</section>
+<section class = "section">
+	 <div class "row">
+	     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div id="gender_balance"></div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div id="average_salary"></div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div id="display_rank"></div>
+        </div>
+    </div>
+</section>
+<section class = "section">
+	 <div class "row">
+	     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <h3>Gender as a Prof</h3>
+            <i class="fa fa-male fa-gender" aria-hidden="true"></i> <span class="number-box" id="percent-of-men-professors"></span>
+            <i class="fa fa-female fa-gender" aria-hidden="true"></i> <span class="number-box" id="percent-of-women-professors"></span>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <h3>Gender as a Assistant Prof</h3>
+            <i class="fa fa-male fa-gender" aria-hidden="true"></i> <span class="number-box" id="percent-of-men-asstprofessors"></span>
+            <i class="fa fa-female fa-gender" aria-hidden="true"></i> <span class="number-box" id="percent-of-women-asstprofessors"></span>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <h3>Gender as a Asociate Prof</h3>
+            <i class="fa fa-male fa-gender" aria-hidden="true"></i> <span class="number-box" id="percent-of-men-asociateprofessors"></span>
+            <i class="fa fa-female fa-gender" aria-hidden="true"></i> <span class="number-box" id="percent-of-women-asociateprofessors"></span>
+        </div>
+    </div>
+</section>
 
-    function makeGraphs(error, salaryData) {
-
-        var ndx = crossfilter(salaryData);
-        
-        var gender_dim = ndx.dimension(dc.pluck('gender'));
-        var count_by_gender = gender_dim.group();
-        
-        dc.barChart("#chart1")
-            .height(300)
-            .width(400)
-            .margins({top: 10, right: 50, bottom: 30, left: 50})
-            .dimension(gender_dim)
-            .group(count_by_gender)
-            .transitionDuration(500)
-            .x(d3.scale.ordinal())
-            .xUnits(dc.units.ordinal)
-            .xAxisLabel("Person")
-            .yAxis().ticks(4);            
-
-        dc.renderAll();
-
-    }
-
-    </script>
-    
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<script type="text/javascript" src="js/graphs.js"></script>    
 </body>
 </html>
